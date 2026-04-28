@@ -329,6 +329,9 @@ class GamePanel extends JPanel{
         Timer aiTimer;
         Timer aiPunchTimer;
         int aiSpeed = 0;
+        // added by kabeer 
+        private static final int PANEL_WIDTH = 1000;
+        private static final int PLAYER_WIDTH = 100; 
 
 
         GameMode(JFrame frame, String playerName, String level) {
@@ -459,6 +462,13 @@ class GamePanel extends JPanel{
                 playerPunch();
                 checkWinner();
 
+            }
+
+            // added by kabeer: keep player inside left and right boundaries of screen
+            if (player1X < 0) { // check left boundary
+                player1X = 0; //  lock the player at left edge
+            } else if (player1X > PANEL_WIDTH - PLAYER_WIDTH) { //  check right boundary
+                player1X = PANEL_WIDTH - PLAYER_WIDTH; //  lock the player at right edge
             }
             repaint();
         }
